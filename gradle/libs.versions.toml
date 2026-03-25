@@ -1,0 +1,36 @@
+[versions]
+assertj = "3.27.7"
+junit = "6.0.3"
+lombok = "1.18.44"
+mockito = "5.23.0"
+postgresql = "42.7.10"
+slf4j = "2.0.17"
+testcontainer = "1.21.4"
+
+[libraries]
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
+postgresTestcontainer = { module = "org.testcontainers:postgresql", version.ref = "testcontainer" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+slf4j-api = { module = "org.slf4j:slf4j-api" }
+slf4j-bom = { module = "org.slf4j:slf4j-bom", version.ref = "slf4j" }
+
+[bundles]
+junit-launcher = [
+    "junit-jupiter",
+    "junit-platform-launcher",
+]
+mockito = [
+    "mockito-core",
+    "mockito-junit-jupiter",
+]
+testcontainers = [
+    "postgresTestcontainer",
+    "postgresql",
+]

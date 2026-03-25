@@ -1,0 +1,32 @@
+pluginManagement {
+    plugins {
+        id 'com.autonomousapps.build-health' version '3.6.1'
+        id 'com.autonomousapps.dependency-analysis' version '3.6.1'
+
+        id 'org.unbroken-dome.test-sets' version '4.1.0'
+        id 'nl.littlerobots.version-catalog-update' version '1.1.0'
+        id 'com.diffplug.spotless' version '8.4.0'
+    }
+
+
+    repositories {
+        mavenCentral()
+        maven {
+            url = 'https://plugins.gradle.org/m2/'
+        }
+    }
+}
+
+plugins {
+    id 'com.autonomousapps.build-health'
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'project-seed'
+
+include 'api'

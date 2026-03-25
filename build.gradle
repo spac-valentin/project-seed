@@ -1,0 +1,44 @@
+plugins {
+    id 'nl.littlerobots.version-catalog-update'
+    id 'com.diffplug.spotless'
+}
+
+group = 'ro.vspac'
+version = '1.0-SNAPSHOT'
+
+allprojects {
+    afterEvaluate {
+        if (plugins.hasPlugin(JavaPlugin)) {
+            apply plugin: 'com.diffplug.spotless'
+            spotless {
+                java {
+                    importOrder()
+
+                    removeUnusedImports()
+                    forbidWildcardImports()
+                    forbidModuleImports()
+
+                    cleanthat()
+                    googleJavaFormat()
+                    formatAnnotations()
+
+                }
+            }
+
+            dependencies {
+                implementation enforcedPlatform(libs.slf4j.bom)
+                testImplementation enforcedPlatform(libs.junit.bom)
+            }
+
+            tasks.withType(Test).configureEach {
+                systemProperty("junit.jupiter.extensions.autodetection.enabled", true)
+                systemProperty("user.timezone", "UTC")
+
+                useJUnitPlatform()
+                testLogging {
+                    events "passed", "skipped", "failed"
+                }
+            }
+        }
+    }
+}
