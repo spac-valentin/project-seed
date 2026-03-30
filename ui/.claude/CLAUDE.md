@@ -52,3 +52,40 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Directory structure - focused on features
+Example:
+```
+src/
+ ├── app/
+ │   ├── core/
+ │   │   ├── services/
+ │   │   │   └── auth.service.ts
+ │   ├── shared/
+ │   │   ├── button/
+ │   │   │   └── button.component.ts
+ │   │   └── shared.module.ts
+ │   ├── features/
+ │   │   ├── auth/
+ │   │   │   ├── login/
+ │   │   │   │   └── login.component.ts
+ │   │   │   ├── register/
+ │   │   │   │   └── register.component.ts
+ │   │   │   ├── auth-routing.module.ts
+ │   │   │   └── auth.module.ts
+ │   ├── app-routing.module.ts
+ │   └── app.module.ts
+
+```
+- Core: For singletons like AuthService and global services.
+- Shared: For reusable components, directives, and pipes.
+- Features: For feature-specific modules.
+
+### Create Feature Modules and Components
+- Generate a New Module for Each Feature: `ng generate module features/<feature-name> --route <route> --module app-routing.module`
+- Create Components in Each Module
+
+### Code Feature Modules with Lazy Loading
+Route configuration should be modularized. Each feature module should declare its own routes, encapsulated in its routing file.
+
+### Connect feature Routes to the AppComponent Routing Module

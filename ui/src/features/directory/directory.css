@@ -1,0 +1,27 @@
+/* Loading spinner — small (inline near search box) */
+.spinner-sm {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid theme('colors.indigo.200');
+  border-top-color: theme('colors.indigo.600');
+  border-radius: 9999px;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Loading spinner — large (full-page loading state) */
+.spinner-lg {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid theme('colors.slate.200');
+  border-top-color: theme('colors.indigo.600');
+  border-radius: 9999px;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
