@@ -1,0 +1,7 @@
+// This module contains only Flyway SQL migration files.
+// It has no Java sources and no module-info.java.
+// At deploy time, the sql/src/main/resources/db/migration/ directory is
+// mounted into the flyway/flyway Docker container to run schema migrations.
+plugins {
+    id 'base'
+}

@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+
+    implementation enforcedPlatform(libs.spring.boot.bom)
+
+    testImplementation libs.archunit.junit5
+    testImplementation libs.assertj.core
+    testImplementation libs.junit.jupiter.api
+    testRuntimeOnly libs.bundles.junit.launcher
+
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+}

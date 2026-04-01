@@ -6,6 +6,7 @@ pluginManagement {
         id 'org.unbroken-dome.test-sets' version '4.1.0'
         id 'nl.littlerobots.version-catalog-update' version '1.1.0'
         id 'com.diffplug.spotless' version '8.4.0'
+        id 'org.springframework.boot' version '4.0.5'
     }
 
 
@@ -29,4 +30,7 @@ dependencyResolutionManagement {
 
 rootProject.name = 'project-seed'
 
-include 'api'
+include 'api:domain'
+include 'api:rest'
+include 'api:persistence'
+include 'api:sql'
