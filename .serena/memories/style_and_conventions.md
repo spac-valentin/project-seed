@@ -1,20 +1,29 @@
 # Style and Conventions
 
 ## Java (api/)
-- **Formatter**: Google Java Format (enforced via Spotless)
-- **Import order**: managed by Spotless (no wildcards, no module imports)
-- **Unused imports**: automatically removed by Spotless
-- **Run `./gradlew spotlessApply`** before committing Java code
+- Google Java Format (enforced via Spotless)
+- No wildcard imports, no module imports
+- Explicit bean registration via `@Import` (no classpath scanning)
+- JPMS: only `*.config` packages exported per module
 - Package root: `ro.vspac`
+- ArchUnit tests enforce layer boundaries
 
-## TypeScript / Angular (ui/)
-- **Formatter**: Prettier 3
-- **Linter**: ESLint with angular-eslint rules
-- **Module structure**: feature-based (`ui/src/features/`, `ui/src/core/`)
-- **Testing**: Vitest (not Jasmine/Karma)
-- **Styling**: TailwindCSS utility classes (no separate SCSS conventions observed)
-- Run `npm run lint` before committing UI code
+## TypeScript/Angular (ui/)
+- Strict TypeScript; avoid `any`, use `unknown`
+- Standalone components (no `standalone: true` needed — default in Angular v20+)
+- Signals for state (`signal()`, `computed()`, `input()`, `output()`)
+- `ChangeDetectionStrategy.OnPush` on all components
+- `inject()` instead of constructor injection
+- `providedIn: 'root'` for singleton services
+- Native control flow (`@if`, `@for`, `@switch`) — NOT `*ngIf`, `*ngFor`
+- `class` bindings instead of `ngClass`; `style` bindings instead of `ngStyle`
+- Reactive forms (not template-driven)
+- `NgOptimizedImage` for static images
+- No `@HostBinding`/`@HostListener` — use `host` object in decorator
+- WCAG AA accessibility required; must pass AXE checks
+- Feature-based directory structure: `core/`, `shared/`, `features/`
+- Lazy loading for feature routes
 
-## General
-- Architecture decisions documented as ADRs in `doc/adr/`
-- Timezone for tests: UTC (set via system property in Gradle)
+## Formatting
+- Java: `./gradlew spotlessApply`
+- TypeScript/HTML: Prettier (`ui/.prettierrc`)

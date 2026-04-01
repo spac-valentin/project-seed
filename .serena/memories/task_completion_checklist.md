@@ -1,17 +1,20 @@
 # Task Completion Checklist
 
-After completing any coding task, run the appropriate checks:
+After completing any coding task:
 
-## For Java (api/) changes
-1. `./gradlew spotlessApply` — auto-format code
-2. `./gradlew :api:build` — ensure build passes
-3. `./gradlew :api:test` — ensure all tests pass
+## Backend changes
+- [ ] Run `./gradlew spotlessApply` to format Java code
+- [ ] Run relevant unit tests: `./gradlew :api:<module>:test`
+- [ ] Run integration tests if persistence/HTTP affected: `./gradlew :api:persistence:itest` or `:api:rest:itest`
+- [ ] If `gradle/libs.versions.toml` changed: run `./gradlew versionCatalogUpdate`
+- [ ] Verify ArchUnit tests still pass (they run as part of `test`)
 
-## For Angular (ui/) changes
-1. `npm run lint` (from `ui/`) — check linting
-2. `ng build` (from `ui/`) — ensure build passes
-3. `ng test` (from `ui/`) — ensure all tests pass
+## Frontend changes
+- [ ] Run `npm run lint` from `ui/`
+- [ ] Run `npm test` from `ui/`
+- [ ] Ensure AXE/WCAG AA accessibility is maintained
 
-## For any changes
-- Verify no new lint/format errors introduced
-- If architecture changes, create an ADR: `adr new <title>` (in nix shell)
+## General
+- [ ] Ensure no classpath scanning introduced (backend)
+- [ ] Ensure JPMS module-info.java updated if new packages added (backend)
+- [ ] ADR in `doc/adr/` if a significant architectural decision was made
