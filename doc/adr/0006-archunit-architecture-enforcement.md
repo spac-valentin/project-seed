@@ -29,13 +29,15 @@ is required because ArchUnit analyses bytecode directly.
 
 ### Rules per module
 
-**`domain/test`**
-- No class in `ro.vspac.domain` may import from `org.springframework` (excluding
-  `spring.context.annotation` used in the `config` sub-package).
-- No class in `ro.vspac.domain` may import from `jakarta.persistence` or `javax.servlet`.
-- Classes in `ro.vspac.domain.model` must not depend on `ro.vspac.domain.usecase`.
-- Classes in `ro.vspac.domain.usecase` must only call outbound ports via interfaces in
-  `ro.vspac.domain.port`; they must not depend on `persistence` or `rest` packages.
+**`domain/test`** ✅ implemented
+- `model` has no outbound dependencies on `port`, `usecase`, or `config`.
+- `port` does not depend on `usecase` or `config`.
+- `usecase` does not depend on `config`.
+- Only `config` may use classes from `org.springframework`.
+- No class in `ro.vspac.domain` may depend on `ro.vspac.rest` or `ro.vspac.persistence`.
+- No class in `ro.vspac.domain` may use `org.springframework.web`, `org.springframework.data`,
+  or `org.springframework.jdbc`.
+- No class in `ro.vspac.domain` may use `jakarta.persistence` or `javax.servlet`.
 
 **`rest/test`**
 - No class in `ro.vspac.rest` (outside `ro.vspac.rest.config`) may depend on any class

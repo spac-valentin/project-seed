@@ -50,15 +50,19 @@ api:rest        ← api:domain
 api:sql         ← (no dependencies)
 ```
 
-`api:rest` depends on `api:persistence` as `runtimeOnly` only. This puts the persistence
-adapter on the classpath for Spring to instantiate at runtime, without allowing `api:rest`
-source code to reference `api:persistence` types at compile time. JPMS (ADR 0007) enforces
-this physically; this Gradle constraint makes the intent explicit and provides a second
-line of defence.
+`api:rest` depends on `api:persistence` as `implementation` solely to reference
+`PersistenceConfig` in `Application.java`'s `@Import`. Only the `config` package of
+`api:persistence` is exported by its `module-info.java`; all implementation classes
+(e.g. `UserJdbcRepository`) remain inaccessible to `api:rest` at the JVM level.
 
-**Forbidden**: `implementation` or `api` dependencies between adapter modules
-(`api:rest` ↔ `api:persistence`). Any such dependency is a build error and an architecture
-violation.
+JPMS (ADR 0007) is the authoritative enforcement mechanism here. A Gradle `runtimeOnly`
+constraint would be a redundant second line of defence that forces indirect wiring
+(e.g. Spring Boot auto-configuration) with no architectural gain. Explicit `@Import` in
+`Application.java` is preferred for clarity.
+
+**Forbidden**: `api:rest` referencing any class outside `ro.vspac.persistence.config`.
+This is enforced by JPMS (unexported packages) and by the ArchUnit rule in `rest/test`
+(ADR 0006).
 
 ### `@SpringBootApplication`
 

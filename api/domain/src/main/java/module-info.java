@@ -1,5 +1,6 @@
 module ro.vspac.domain {
   requires static lombok;
+  requires spring.context;
 
   exports ro.vspac.domain.model;
   exports ro.vspac.domain.port;

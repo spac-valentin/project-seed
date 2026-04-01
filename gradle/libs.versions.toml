@@ -3,6 +3,7 @@ archunit = "1.4.1"
 assertj = "3.27.7"
 junit = "6.0.3"
 lombok = "1.18.44"
+mapstruct = "1.6.3"
 mockito = "5.23.0"
 postgresql = "42.7.10"
 slf4j = "2.0.17"
@@ -17,6 +18,8 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
+mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
 postgresTestcontainer = { module = "org.testcontainers:postgresql", version.ref = "testcontainer" }
@@ -27,6 +30,7 @@ spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies"
 spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-context = { module = "org.springframework:spring-context" }
 
 [bundles]
 junit-launcher = [

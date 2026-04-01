@@ -26,8 +26,12 @@ for JPMS compatibility (see ADR 0007).
 We will use Spring Boot (latest stable release) as the application framework.
 
 Classpath scanning is disabled. Every bean is registered explicitly via `@Configuration`
-classes. Each module exposes exactly one `@Configuration` class in its `config` package;
+classes. Each module exposes its `@Configuration` class(es) in its `config` package;
 the `rest` module's `Application` class `@Import`s these to compose the full context.
+
+`@SpringBootApplication` is not used. `Application` is annotated with
+`@SpringBootConfiguration` + `@EnableAutoConfiguration` to avoid implicitly enabling
+`@ComponentScan`.
 
 Spring's dependency BOM is added to the version catalog to manage transitive dependency
 versions consistently alongside the existing `slf4j.bom` and `junit.bom` patterns.

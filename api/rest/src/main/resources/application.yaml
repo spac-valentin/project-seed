@@ -1,0 +1,7 @@
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/projectseed}
+    username: ${DB_USERNAME:projectseed}
+    password: ${DB_PASSWORD:projectseed}

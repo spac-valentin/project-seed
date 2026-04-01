@@ -78,16 +78,18 @@ module ro.vspac.rest {
 ### Spring wiring without scanning
 
 Because classpath scanning is disabled (ADR 0002), `rest` explicitly imports each
-module's configuration:
+module's configuration. `@SpringBootApplication` is not used — it would implicitly enable
+`@ComponentScan`. Instead, `Application` uses the two constituent annotations directly:
 
 ```java
-@SpringBootApplication(scanBasePackages = {})
-@Import({DomainConfig.class, PersistenceConfig.class})
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@Import({DomainConfig.class, PersistenceConfig.class, ...})
 public class Application { }
 ```
 
-`@Configuration(proxyBeanMethods = false)` is used on all configuration classes to avoid
-CGLIB subclassing, which reduces the `opens` directives needed and is more JPMS-friendly.
+All `@Configuration` classes use `proxyBeanMethods = false` to avoid CGLIB subclassing,
+which reduces the `opens` directives needed and is more JPMS-friendly.
 
 ### Automatic module names
 

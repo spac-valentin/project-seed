@@ -8,6 +8,11 @@ Java backend using Spring Boot 4, hexagonal (ports & adapters) architecture, and
 - `persistence/` — secondary adapter; Spring JDBC implementations of domain ports
 - `sql/`         — Flyway migration SQL files only (no Java)
 
+## Lombok conventions
+- Always use `@NonNull` for non-null fields and method parameters
+- Use `@RequiredArgsConstructor` instead of writing a constructor whose only logic is binding parameters to fields; put `@NonNull` on the field, not the constructor parameter
+- Use `@Builder(toBuilder = true)` on any value object (record or class) with more than 3 fields
+
 ## Key conventions
 - **No classpath scanning**: all beans declared explicitly via `@Import` in `Application.java`
 - **JPMS**: each module has `module-info.java`; only `*.config` packages are exported
@@ -20,6 +25,9 @@ Java backend using Spring Boot 4, hexagonal (ports & adapters) architecture, and
 - `ro.vspac.persistence.*`
 
 ## Dependency management
+Never add dependencies directly as string literals in `build.gradle` files.
+Always declare them in `gradle/libs.versions.toml` first and reference them via the version catalog (e.g. `libs.spring.context`).
+
 After any change to `gradle/libs.versions.toml` (adding, removing, or editing entries), always run:
 ```
 ./gradlew versionCatalogUpdate

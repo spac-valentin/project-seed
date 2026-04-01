@@ -1,5 +1,9 @@
 module ro.vspac.rest {
   requires ro.vspac.domain;
+  requires static lombok;
+  requires ro.vspac.persistence;
+
+  requires org.mapstruct;
 
   requires spring.beans;
   requires spring.boot;
@@ -12,6 +16,7 @@ module ro.vspac.rest {
   exports ro.vspac.rest.config;
 
   opens ro.vspac.rest to
+      org.mapstruct,
       spring.beans,
       spring.context,
       spring.core,

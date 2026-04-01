@@ -8,6 +8,7 @@ dependencies {
     annotationProcessor libs.lombok
 
     implementation enforcedPlatform(libs.spring.boot.bom)
+    implementation libs.spring.context
 
     testImplementation libs.archunit.junit5
     testImplementation libs.assertj.core

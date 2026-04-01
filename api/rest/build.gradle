@@ -11,10 +11,12 @@ testSets {
 
 dependencies {
     implementation project(':api:domain')
-    runtimeOnly project(':api:persistence')
+    implementation project(':api:persistence')
 
     compileOnly libs.lombok
     annotationProcessor libs.lombok
+    implementation libs.mapstruct
+    annotationProcessor libs.mapstruct.processor
 
     implementation enforcedPlatform(libs.spring.boot.bom)
     implementation libs.spring.boot.starter.web
